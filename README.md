@@ -1,2 +1,2 @@
 # LMAB1
-Code repository for shared methods for LMAB1 F2021
+Code repository of shared methods for LMAB1 F2021
