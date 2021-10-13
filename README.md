@@ -16,4 +16,5 @@ python3 montage.py WELL CHANNEL
 #### Note
  - The output image is saved as "WELLdCHANNEL.png" (e.g. B02d2.png is the channel 2/PI montage of B02).
  - Image output for single channel is grayscaled and is RGB (PI-R, Hoechst-B). *The double channel ouptut is still a bit janky, so be doublecheck the result and see if it makes sense.*
+ - This tool is meant for a quick visualization. Therefore,brightness normalization **is not implemented** across wells. You can try and implement it for your own use (or maybe share it by making a pull-request)!
 
