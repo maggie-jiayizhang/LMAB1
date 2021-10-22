@@ -12,6 +12,7 @@ python3 montage.py WELL CHANNEL
 # WELL is the name of the image directory, which is also the well ID; e.g. B02
 # CHANNEL is the channel the montage will be performed on.
 # 0 = Hoechst, 1 = Brightfield, 2 = PI, 3 = Composite of 0+2
+# o1 = Object
 ```
 #### Note
  - The output image is saved as "WELLdCHANNEL.png" (e.g. B02d2.png is the channel 2/PI montage of B02).

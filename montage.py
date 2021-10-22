@@ -14,7 +14,7 @@ ROWS = 5
 COLS = 5
 FIELDS = ROWS * COLS
 # format string: Well + Field + Channel
-FORMAT = "%sf%sd%d.TIF"
+FORMAT = "%sf%s%s.TIF"
 
 MAP = [[21, 22, 23, 24, 25],
        [20,  7,  8,  9, 10],
@@ -43,23 +43,26 @@ if __name__ == '__main__':
 
     n_ch = 2
     if (len(sys.argv) > 2):
-        n_ch = int(sys.argv[2])
-    
+        n_ch = sys.argv[2]
+
     # cannot have more than 2 channels
-    if (n_ch > 3): assert(0)
-    elif (n_ch < 3):
+    if (n_ch == 'o1'): 
         result_all = np.zeros((ROWS*SIZE, COLS*SIZE))
-        build_channel(well, prefix, n_ch, result_all)
-        plt.imsave("%sd%d.png"%(well, n_ch), result_all, cmap='gray')
-    elif(n_ch == 3):
-        channels = [2, 0] # R-PI, G-None, B-Hoechst
+        build_channel(well, prefix, "o1", result_all)
+        plt.imsave("%s%s.png"%(well, n_ch), result_all, cmap='gray')
+    elif (int(n_ch) < 3):
+        result_all = np.zeros((ROWS*SIZE, COLS*SIZE))
+        build_channel(well, prefix, 'd'+n_ch, result_all)
+        plt.imsave("%sd%s.png"%(well, n_ch), result_all, cmap='gray')
+    elif(int(n_ch) == 3):
+        channels = ['2', '0'] # R-PI, G-None, B-Hoechst
         result_all = np.zeros((ROWS*SIZE, COLS*SIZE, 3))
         for channel in channels:
             # enforce that PI gets the first/red channel
             # Hoechst the third/blue channel
-            build_channel(well, prefix, channel, result_all[:,:,2-channel]) 
-            result_all[:,:,2-channel] = rescale(result_all[:,:,2-channel])
-        plt.imsave("%sd%d.png"%(well, n_ch), result_all)
+            build_channel(well, prefix, 'd'+channel, result_all[:,:,2-int(channel)]) 
+            result_all[:,:,2-int(channel)] = rescale(result_all[:,:,2-int(channel)])
+        plt.imsave("%sd%s.png"%(well, n_ch), result_all)
 
     print("output size: ", np.shape(result_all))
 
